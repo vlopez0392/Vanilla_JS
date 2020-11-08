@@ -78,3 +78,4 @@ for(let x in user){ //k,v pairs
 }   
 
 
+var triangle = {a: 1, b: 2, c: 3};

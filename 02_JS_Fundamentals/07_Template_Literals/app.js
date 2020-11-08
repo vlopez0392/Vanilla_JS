@@ -27,7 +27,6 @@ function hello(){
     return 'Hi I\'m Vick!';
 }
 
-
 document.body.innerHTML = html;
 
 
