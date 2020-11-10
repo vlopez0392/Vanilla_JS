@@ -21,7 +21,7 @@ taskTitle.style.padding = "5px";
 
 //taskTitle.style.display = 'none'; //Gets rid of the element
 
-//Change content 
+//ChangING text content 
 taskTitle.textContent = "Task List";
 taskTitle.innerText = "My Tasks";
 
