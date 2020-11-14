@@ -45,7 +45,6 @@ val = document.scripts;
 val = document.scripts[2].getAttribute('src');
 
 //Converting HTML collections into arrays 
-
 let scripts = Array.from(document.scripts) 
 
 scripts.forEach(function(script){
