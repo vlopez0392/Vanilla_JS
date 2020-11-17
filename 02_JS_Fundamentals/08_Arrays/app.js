@@ -58,7 +58,7 @@ someNumbers.shift();
 console.log(someNumbers);
 
 //Splicing values from the array (start, end) where end value is non-inclusive
-someNumbers.splice(1,3) //Removes values at indices 1 and 2
+someNumbers.splice(1,3) //Remove three values starting from index 1
 console.log(someNumbers);
 
 //Reverse values
