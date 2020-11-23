@@ -1,5 +1,17 @@
 //Listen for submit 
-document.getElementById('loan-form').addEventListener('submit', calculateResults);
+document.getElementById('loan-form').addEventListener('submit', function(e){
+
+    //Hide results
+    document.getElementById('results').style.display = 'none'; //Hide results whenever the Calculate button is pressed
+
+    //Show loader 
+    document.getElementById('loading').style.display = 'block';
+
+    //Set timeout
+    setTimeout(calculateResults,2000); //2000 ms = 2 s - Call calculate results after 2 seconds 
+
+    e.preventDefault();
+});
 
 //Calculate results 
 function calculateResults(e){
@@ -26,10 +38,14 @@ function calculateResults(e){
         monthlyPayment.value = monthly.toFixed(2);
         totalPayment.value = (monthly*calculatedPayments).toFixed(2);
         totalInterest.value = ((monthly * calculatedPayments)-principal).toFixed(2);
+        
+        //Show results
+        document.getElementById('results').style.display = 'block';
     } else {
         showError('Please check your numbers');
     }
-    e.preventDefault();
+    //Hide loader
+    document.getElementById('loading').style.display = 'none';
 }
 
 //Show and clear error
