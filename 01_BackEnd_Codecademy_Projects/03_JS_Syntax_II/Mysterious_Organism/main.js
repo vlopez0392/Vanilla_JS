@@ -1,5 +1,10 @@
 /*
-Context: You’re part of a research team that has found a new mysterious organism at the bottom of the ocean near hydrothermal vents. Your team names the organism, Pila aequor (P. aequor), and finds that it is only comprised of 15 DNA bases. The small DNA samples and frequency at which it mutates due to the hydrothermal vents make P. aequor an interesting specimen to study. However, P. aequor cannot survive above sea level and locating P. aequor in the deep sea is difficult and expensive. Your job is to create objects that simulate the DNA of P. aequor for your research team to study. 
+Context: You’re part of a research team that has found a new mysterious organism at the bottom of the ocean near 
+hydrothermal vents. Your team names the organism, Pila aequor (P. aequor), and finds that it is only comprised of 
+15 DNA bases. The small DNA samples and frequency at which it mutates due to the hydrothermal vents make P. aequor 
+an interesting specimen to study. However, P. aequor cannot survive above sea level and locating P. aequor in the deep 
+sea is difficult and expensive. Your job is to create objects that simulate the DNA of P. aequor for your research 
+team to study. 
 */
 
 //Helper Functions
@@ -43,11 +48,10 @@ const baseMutator = base =>{
 
 /*
 Since you need to create multiple objects, create a factory function pAequorFactory() that has two parameters:
-
     The first parameter is number (no two organisms should have the same number).
     The second parameter is an array of 15 DNA bases.
-
-pAequorFactor() should return an object that contains the properties specimenNum and dna that correspond to the parameters provided. 
+pAequorFactor() should return an object that contains the properties specimenNum and dna 
+that correspond to the parameters provided. 
 */
 //pAequorFactory()
 const pAequorFactory = (num, dnaBase) => {
@@ -64,7 +68,8 @@ const pAequorFactory = (num, dnaBase) => {
 
       To simulate a mutation, in pAequorFactory()‘s returned object, add the method .mutate().
       
-      .mutate() is responsible for randomly selecting a base in the object’s dna property and changing the current base to a different base. Then .mutate() will return the object’s dna. 
+      .mutate() is responsible for randomly selecting a base in the object’s dna property and 
+      changing the current base to a different base. Then .mutate() will return the object’s dna. 
       */
       mutate(){
           const randIndex = Math.floor(Math.random()*14)
@@ -80,7 +85,9 @@ const pAequorFactory = (num, dnaBase) => {
 
       .compareDNA() has one parameter, another pAequor object.
 
-      The behavior of .compareDNA() is to compare the current pAequor‘s .dna with the passed in pAequor‘s .dna and compute how many bases are identical and in the same locations. .compareDNA() does not return anything, but prints a message that states the percentage of DNA the two objects have in common — use the .specimenNum to identify which pAequor objects are being compared.
+      The behavior of .compareDNA() is to compare the current pAequor‘s .dna with the passed in pAequor‘s .dna and 
+      compute how many bases are identical and in the same locations. .compareDNA() does not return anything, 
+      but prints a message that states the percentage of DNA the two objects have in common — use the .specimenNum to identify which pAequor objects are being compared.
       */
 
       compareDNA(otherSpecimen){
@@ -98,7 +105,8 @@ const pAequorFactory = (num, dnaBase) => {
 
       In the returned object of pAequorFactory(), add another method .willLikelySurvive().
 
-      .willLikelySurvive() returns true if the object’s .dna array contains at least 60% 'C' or 'G' bases. Otherwise, .willLikelySurvive() returns false.
+      .willLikelySurvive() returns true if the object’s .dna array contains at least 60% 'C' or 'G' bases. 
+      Otherwise, .willLikelySurvive() returns false.
       */
 
       willLikelySurvive(display = false){
