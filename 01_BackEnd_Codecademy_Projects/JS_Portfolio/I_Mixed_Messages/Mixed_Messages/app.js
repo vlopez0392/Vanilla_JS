@@ -29,8 +29,6 @@ function getUserFeeling(){
                 dispMessage = 'Sorry I can\'t relate to that one now :(';
         }
     }
-
-
     return dispMessage;
 }
 
@@ -38,7 +36,7 @@ function displayUserFeeling(e){
     const dispMsg = getUserFeeling();
     console.log(dispMsg);
     if(dispMsg === ''){
-        disp.textContent = 'Please write something... it\'s ok! Please try again!'
+        disp.textContent = 'You didn\'t write anything... it\'s ok! Please try again!'
     }else{
         disp.textContent = dispMsg;
     }

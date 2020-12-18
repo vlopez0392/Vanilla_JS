@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: 'Roboto';
+}
+
+#query-user{
+    height: 100px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    flex-wrap: wrap;
+}
+
+#query-user p{
+    font-size: 26px;
+
+}
+
+#input-form{
+    margin: 30px auto;
+    text-align:center;
+}
+
+#input-form .user-input{
+    margin: 20px auto;
+    font-size: 18px;
+    width: 500px;
+}
+
+#input-form .user-input #feeling {
+    display: block;
+    margin: 20px auto;
+    font-size: 18px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+/*Submit button*/
+#input-form .user-input .submit {
+    display: block;
+    margin: 10px auto;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#input-form .user-input .submit:hover {
+    background-color: #2fe1a5;
+    color: #333;
+}
+
