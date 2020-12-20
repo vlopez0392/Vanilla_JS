@@ -7,23 +7,34 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div id = 'query-user'>
+    <div id = 'welcome-msg'>
         <p> Hello! Welcome to your personal motivator app!</p>
     </div>
-    <div id = 'input-form'>
-        <form action="#">
-            <div class = 'user-input'>
-                <label for="text"> How are you feeling today? Enter how you feel below: </label>
-                <input type="text" id ='feeling' autocomplete="off">
-                <input type="submit" value = "Submit" class = "submit">
-            </div>
-        </form>
+
+    <div id="user-click">
+        <p>How are you feeling today? Choose the smiley you relate to the most now.</p>
         
-        <p>Waiting patiently for your input...</p>
+        <div id = 'smiley-gallery'>
+            <img class = 'smiley' src="/css/img/flat-emoticon-reaction-collection/Happy.jpg" alt="OK">
+            <img class = 'smiley' src="/css/img/flat-emoticon-reaction-collection/OK.jpg" alt="OK">
+            <img class = 'smiley' src="/css/img/flat-emoticon-reaction-collection/sad.jpg" alt="OK">
+            <img class = 'smiley' src="/css/img/flat-emoticon-reaction-collection/angry.jpg" alt="OK">
+        </div>
+    </div>
+
+    <div id = 'user-type'>
+        <div id = 'input-form'>
+            <form action="#">
+                <div class = 'user-input'>
+                    <label for="text"> How are you feeling today? Type how you feel below: </label>
+                    <input type="text" id ='input-feeling' autocomplete="off">
+                    <input type="submit" value = "Submit" class = "submit">
+                </div>
+            </form>
+            <p>Waiting patiently for your input...</p>
+        </div>
     </div>
     
-
-
     <script src="/app.js"></script>
 </body>
 </html>

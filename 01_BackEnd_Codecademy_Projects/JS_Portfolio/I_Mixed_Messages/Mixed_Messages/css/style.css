@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+/*CSS reset*/
 * {
     box-sizing: border-box;
     padding: 0;
@@ -10,20 +11,36 @@ body{
     font-family: 'Roboto';
 }
 
-#query-user{
+#container{
+    margin: auto;
+}
+
+#welcome-msg{
     height: 100px;
-    margin: 10px auto;
+    margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;   
     flex-wrap: wrap;
 }
 
-#query-user p{
+#welcome-msg p{
     font-size: 26px;
-
 }
 
+/*User-click*/
+#user-click p{
+    font-size: 18px;
+    text-align: center; 
+}
+
+/*Smiley gallery*/
+#user-click #smiley-gallery img .smiley{
+    height: 100px;
+    width: 100px;
+}
+
+/*User-type*/
 #input-form{
     margin: 30px auto;
     text-align:center;
@@ -35,7 +52,7 @@ body{
     width: 500px;
 }
 
-#input-form .user-input #feeling {
+#input-form .user-input #input-feeling {
     display: block;
     margin: 20px auto;
     font-size: 18px;
