@@ -1,40 +1,44 @@
-/*  Message generator 
+/*  Mixed Message Generator 
 *
 *   Programmed by Vick!
 */ 
 
-/*Relevant constants*/
-const question = "How are you feeling today?", form = document.getElementById('input-form');
+/*Constants*/
+const question = "How are you feeling today?", 
+form = document.getElementById('input-form'),
+gallery = document.getElementById('smiley-gallery');
 
-/*Input variables*/
-let par = document.querySelectorAll('p'), disp = par[par.length-1];
 
-/* Data */
-/*Output some data to the console*/
+/*Variables*/
+let userInput = '' 
+par = document.querySelectorAll('p'), 
+dispMsg = par[par.length-1]; //Selects the last paragraph
+
+
+/*Event listeners*/
 form.addEventListener("submit", displayUserFeeling); 
 
-/*Helper functions*/
-function getUserFeeling(){
-    let userInput = document.getElementById('input-feeling').value.toLowerCase(), dispMessage = ''
-    if(userInput !== ''){
-        switch(estimateFeeling(userInput)){
-            case 'happy':
-                dispMessage = `I\'m glad you are feeling ${userInput}.`;
-                break;
-            case 'ok':
-                dispMessage = 'Care for a joke? Or would you like to be cheered up?';
-                break;
-            case 'sad':
-                dispMessage = 'Here goes a cheerful message: Never give up on your dreams, be courageous!';    
-                break;
-            case 'angry':
-                dispMessage = 'Seems you are not in the mood right now, will still be here if you need me!'
-                break;
-            default:
-                dispMessage = 'Sorry I don\'t understand that! :( Please try again!';
-        }
+gallery.addEventListener('click', function(e){
+    let targetId = e.target.id, targetClass = e.target.className;
+
+    if(targetClass=== 'smiley'){
+        displayUserFeeling(false, targetId)
     }
-    return dispMessage;
+})
+
+/*Helper functions*/
+function getClickedUserFeeling(targetId){
+    return switchFeeling(targetId, targetId);
+}
+
+function getTypedUserFeeling(){
+    let userInput = document.getElementById('input-feeling').value.toLowerCase(),
+    msg = '';
+    
+    if(userInput !== ''){
+         msg = switchFeeling(estimateFeeling(userInput), userInput);
+    }
+    return msg;
 }
 
 function estimateFeeling(userInput){
@@ -50,17 +54,42 @@ function estimateFeeling(userInput){
             return feeling;
         }
     }
-    return false;;
+    return false;
 }
 
-function displayUserFeeling(e){
-    const dispMsg = getUserFeeling();
-    if(dispMsg === ''){
-        disp.textContent = 'You didn\'t write anything... it\'s ok! Please try again!'
-    }else{
-        disp.textContent = dispMsg;
+function switchFeeling(feeling, userInput){
+    let dispMessage = '';
+
+    switch(feeling){
+        case 'happy':
+            dispMessage = `I\'m glad you are feeling ${userInput}.`;
+            break;
+        case 'ok':
+            dispMessage = 'Care for a joke? Or would you like to be cheered up?';
+            break;
+        case 'sad':
+            dispMessage = 'Here goes a cheerful message: Never give up on your dreams, be courageous!';    
+            break;
+        case 'angry':
+            dispMessage = 'Seems you are not in the mood right now, will be here if you need me!'
+            break;
+        default:
+            dispMessage = 'Sorry I don\'t understand that! :( Please try again!';
     }
-    e.preventDefault();
+    
+    return dispMessage;
+}
+
+function displayUserFeeling(typed = true, targetId = 'none'){
+    let msg = '';
+    typed? msg = getTypedUserFeeling(): msg = getClickedUserFeeling(targetId);
+    console.log(msg);
+
+    if(msg === ''){
+        dispMsg.textContent = 'You didn\'t write anything... it\'s ok! Please try again!';
+    }else{
+        dispMsg.textContent = msg; 
+    }
 }
 
 /*Listen for selection*/
