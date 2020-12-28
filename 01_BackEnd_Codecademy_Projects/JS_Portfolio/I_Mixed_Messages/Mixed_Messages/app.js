@@ -6,8 +6,8 @@
 /*Constants*/
 const question = "How are you feeling today?", 
 form = document.getElementById('input-form'),
-gallery = document.getElementById('smiley-gallery');
-
+gallery = document.getElementById('smiley-gallery'),
+inputFeeling = document.getElementById('input-feeling');
 
 /*Variables*/
 let userInput = '' 
@@ -17,6 +17,8 @@ dispMsg = par[par.length-1]; //Selects the last paragraph
 
 /*Event listeners*/
 form.addEventListener("submit", displayUserFeeling); 
+//inputFeeling.addEventListener('click', focusInput)
+
 
 gallery.addEventListener('click', function(e){
     let targetId = e.target.id, targetClass = e.target.className;
@@ -27,10 +29,12 @@ gallery.addEventListener('click', function(e){
 })
 
 /*Helper functions*/
+/*Returns the message associated with the smiley the user clicked*/ 
 function getClickedUserFeeling(targetId){
     return switchFeeling(targetId, targetId);
 }
 
+/*Returns the message associated with the feeling input by the user*/
 function getTypedUserFeeling(){
     let userInput = document.getElementById('input-feeling').value.toLowerCase(),
     msg = '';
@@ -41,6 +45,7 @@ function getTypedUserFeeling(){
     return msg;
 }
 
+/*Estimates the current feeling of the user based on their input*/
 function estimateFeeling(userInput){
     const feelings = {
         ok: ['ok', 'fine','well', 'all right', 'just fine', 'good'],
@@ -57,6 +62,7 @@ function estimateFeeling(userInput){
     return false;
 }
 
+/*Returns a message to be displayed according to the feeling argument, also uses the input of the user to enhance interactivity*/
 function switchFeeling(feeling, userInput){
     let dispMessage = '';
 
@@ -80,10 +86,10 @@ function switchFeeling(feeling, userInput){
     return dispMessage;
 }
 
+/*Displays a message based on the user's choice*/
 function displayUserFeeling(typed = true, targetId = 'none'){
     let msg = '';
     typed? msg = getTypedUserFeeling(): msg = getClickedUserFeeling(targetId);
-    console.log(msg);
 
     if(msg === ''){
         dispMsg.textContent = 'You didn\'t write anything... it\'s ok! Please try again!';
@@ -92,7 +98,7 @@ function displayUserFeeling(typed = true, targetId = 'none'){
     }
 }
 
-/*Listen for selection*/
+/*Listens for selection*/
 function playWithDisplay(element,onOff){
     const displayElement = document.getElementById(element);
 

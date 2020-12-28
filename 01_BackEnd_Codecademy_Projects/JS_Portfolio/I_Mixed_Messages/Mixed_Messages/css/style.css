@@ -47,6 +47,10 @@ body{
     width: 100px; 
 }
 
+#user-click a:hover img{
+    border:#2fe1a5 2px solid;
+}
+
 /*User-type*/
 #input-form{
     margin: 30px auto;
@@ -68,6 +72,10 @@ body{
     text-align: center;
 }
 
+#input-form .user-input #input-feeling:hover{
+    border:#2fe1a5 2px solid;
+}
+
 /*Submit button*/
 #input-form .user-input .submit {
     display: block;
@@ -81,7 +89,7 @@ body{
 
 #input-form .user-input .submit:hover {
     background-color: #2fe1a5;
-    color: #333;
+    color: #000;
     border: 1px #000 solid;
 }
 
