@@ -11,8 +11,7 @@ inputFeeling = document.getElementById('input-feeling');
 
 /*Variables*/
 let userInput = '' 
-par = document.querySelectorAll('p'), 
-dispMsg = par[par.length-1]; //Selects the last paragraph
+par = document.querySelector('p'), 
 
 
 /*Event listeners*/
@@ -29,12 +28,12 @@ gallery.addEventListener('click', function(e){
 })
 
 /*Helper functions*/
-/*Returns the message associated with the smiley the user clicked*/ 
+/*Returns the message associated with the smiley clicked by  the user*/ 
 function getClickedUserFeeling(targetId){
     return switchFeeling(targetId, targetId);
 }
 
-/*Returns the message associated with the feeling input by the user*/
+/*Returns the message associated with the feeling typed by the user*/
 function getTypedUserFeeling(){
     let userInput = document.getElementById('input-feeling').value.toLowerCase(),
     msg = '';
