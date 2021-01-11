@@ -7,6 +7,7 @@ const pathCharacter = '*';
 const testField = [['*','░','░','░','░'],['░','O','░','^','░'],['░','░', '^','░','░']];
 
 class Field{
+    //OK
     constructor(field){
         if(Array.isArray(field) && checkValidFieldDim(field)){
             this.field = field;
@@ -16,6 +17,7 @@ class Field{
         }
     }
 
+    //OK
     static printField(field){
         const fieldDim1 = field.length;
         let fieldLine = '';
@@ -29,8 +31,10 @@ class Field{
         }
     }
 
+
+    //OK
     static checkValidFieldDim(field){
-        const dim1  = field.length     //Number of subarray elements  
+        const dim1 = field.length     //Number of subarray elements  
         const dim2 = field[0].length;  //Length of the first subarray element
 
         if(dim1 <= 0){ //Handles call with no parameters.
@@ -53,41 +57,90 @@ class Field{
         return false;
     }
 
-    static updateField(field){ //Develop this logic later!
+    //OK?
+    static updateField(field){
         Field.printField(field);
 
         const updatePrompt = require('prompt-sync')({sigint: true});
-        let decision = updatePrompt('Which way? ');
-        decision = decision.toLowerCase();
+        let move = updatePrompt('Which way? ');
+        console.log(move); //* */
+        let playing = true, numberOfMoves = 0, currPosition = [0,0], updatePosition; //Default position for pathCharacter
         
-        let lineField = field[0];
-        let deciding = true;
-        let numberOfMoves
-        let i = 0, j =0;
-        
-        while(deciding){
+        while(playing){
             if(numberOfMoves === 0){
                 numberOfMoves +=1;
             }else{
-                decision = updatePrompt('Which way? ');
-                console.log(decision);
-                decision = decision.toLowerCase();
+                move = updatePrompt('Which way? ');
+                move = move.toLowerCase();
                 numberOfMoves +=1;
             }
-
-            if(decision === 'l'){
-                j = j+1;
-                field[i][j] = pathCharacter;
-                
-            }else if( decision === 'q' || decision === 'quit'){
-                deciding = false;
+            
+            if(move !== 'q' || move !== 'quit'){
+                 updatePosition = this.movePathChar(field, move, currPosition);
+                 currPosition = updatePosition[0];
+                 field = updatePosition[1];
+            }else{
+                playing = false;
             }
 
-            console.clear()
+            //console.clear()
             Field.printField(field);
-            console.log(decision);
-        }///Going left for now only
+        }
     }   
+    
+    static movePathChar(field, move, currPosition){
+        move = move.toLowerCase();
+        let i = currPosition[0], j = currPosition[1], flagUpdate = false;
+
+        switch(move){
+            case 'w': //Move path character up
+                i-=1;
+                if(this.tryPositionUpdate(i, j, field)){
+                    field[i][j] = pathCharacter;
+                    flagUpdate = true;
+                }
+                break;
+            case 's': //Move path character down
+                i+=1;
+                if(this.tryPositionUpdate(i, j, field)){
+                    field[i][j] = pathCharacter;
+                    flagUpdate = true;
+                }
+                break;
+            case 'd': //Move path character right
+                j+=1;
+                if(this.tryPositionUpdate(i, j, field)){
+                    field[i][j] = pathCharacter;
+                    flagUpdate = true;
+                }
+                break;
+            case 'a': //Move path character left
+                j-=1;
+                if(this.tryPositionUpdate(i, j, field)){
+                    field[i][j] = pathCharacter;
+                    flagUpdate = true;
+                }
+                break;
+            default:
+                console.log('This is not a valid move, please try again.');
+                break;
+        };
+        if(flagUpdate){
+            currPosition = [i,j];
+        }
+        return [currPosition,field];
+    }
+
+    static tryPositionUpdate(i,j,field){
+        let newPosition, dim1 = field.length, dim2 = field[0].length; 
+        if(i>=0 && i< dim1 && j>=0 && j<dim2){ 
+            newPosition = field[i][j];
+            return true;
+        }else{
+            console.log("Out of bounds!")
+            return false;
+        }
+    }
 }
 
 module.exports = {Field, testField};

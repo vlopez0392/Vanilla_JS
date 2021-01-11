@@ -8,7 +8,6 @@ class Game{
     newGame(){
         const promptNewGame = require('prompt-sync')({sigint: true});
         let decision = promptNewGame(`Do you want to play?  `);
-
         decision = decision.toLowerCase();
 
         if(decision === 'y'){
