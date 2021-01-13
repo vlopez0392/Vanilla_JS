@@ -1,15 +1,14 @@
-
 const hat = '^';
 const hole = 'O';
 const fieldCharacter = '░';
 const pathCharacter = '*';
 
-const testField = [['*','░','░','░','░'],['░','O','░','^','░'],['░','░', '^','░','░']];
+const testField = [['*','░','░','░','O'],['░','░','░','O','░'],['O','░', '^','░','░'],['░','O','O','O','░'], ['░','O','░','O','░']];
 
 class Field{
     //OK
     constructor(field){
-        if(Array.isArray(field) && checkValidFieldDim(field)){
+        if(Array.isArray(field) && Field.checkValidFieldDim(field)){
             this.field = field;
         }else{
             console.log("Invalid input field! Generating our own field...")
@@ -31,11 +30,9 @@ class Field{
         }
     }
 
-
-    //OK
     static checkValidFieldDim(field){
-        const dim1 = field.length     //Number of subarray elements  
-        const dim2 = field[0].length;  //Length of the first subarray element
+        const dim1 = field.length      //Number of subarray elements  
+        const dim2 = field[0].length;  //Length of the first subarray and subsequent elements.
 
         if(dim1 <= 0){ //Handles call with no parameters.
             return false; 
@@ -57,13 +54,10 @@ class Field{
         return false;
     }
 
-    //OK?
-    static updateField(field){
+    updateField(field){
         Field.printField(field);
-
         const updatePrompt = require('prompt-sync')({sigint: true});
         let move = updatePrompt('Which way? ');
-        console.log(move); //* */
         let playing = true, numberOfMoves = 0, currPosition = [0,0], updatePosition; //Default position for pathCharacter
         
         while(playing){
@@ -75,66 +69,51 @@ class Field{
                 numberOfMoves +=1;
             }
             
-            if(move !== 'q' || move !== 'quit'){
+            if(move !== 'q'){
                  updatePosition = this.movePathChar(field, move, currPosition);
                  currPosition = updatePosition[0];
                  field = updatePosition[1];
+                
+                 //console.clear()
+                 Field.printField(field);
             }else{
                 playing = false;
             }
-
-            //console.clear()
-            Field.printField(field);
         }
     }   
     
-    static movePathChar(field, move, currPosition){
+    movePathChar(field, move, currPosition){
         move = move.toLowerCase();
-        let i = currPosition[0], j = currPosition[1], flagUpdate = false;
+        let i = currPosition[0], j = currPosition[1];
 
         switch(move){
             case 'w': //Move path character up
                 i-=1;
-                if(this.tryPositionUpdate(i, j, field)){
-                    field[i][j] = pathCharacter;
-                    flagUpdate = true;
-                }
                 break;
             case 's': //Move path character down
                 i+=1;
-                if(this.tryPositionUpdate(i, j, field)){
-                    field[i][j] = pathCharacter;
-                    flagUpdate = true;
-                }
                 break;
             case 'd': //Move path character right
                 j+=1;
-                if(this.tryPositionUpdate(i, j, field)){
-                    field[i][j] = pathCharacter;
-                    flagUpdate = true;
-                }
                 break;
             case 'a': //Move path character left
                 j-=1;
-                if(this.tryPositionUpdate(i, j, field)){
-                    field[i][j] = pathCharacter;
-                    flagUpdate = true;
-                }
                 break;
             default:
                 console.log('This is not a valid move, please try again.');
                 break;
         };
-        if(flagUpdate){
+
+        if(Field.tryPositionUpdate(i, j, field)){
+            field[i][j] = pathCharacter;
             currPosition = [i,j];
         }
         return [currPosition,field];
     }
 
     static tryPositionUpdate(i,j,field){
-        let newPosition, dim1 = field.length, dim2 = field[0].length; 
+        let dim1 = field.length, dim2 = field[0].length; 
         if(i>=0 && i< dim1 && j>=0 && j<dim2){ 
-            newPosition = field[i][j];
             return true;
         }else{
             console.log("Out of bounds!")
