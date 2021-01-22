@@ -1,14 +1,14 @@
-const hat = '^';
-const hole = 'O';
-const fieldCharacter = '░';
-const pathCharacter = '*';
+let fieldElements = {
+    hat:'^',
+    hole:'O',
+    fieldCharacter:'░',
+    pathCharacter:'*',
+}
 
 const testField = [['*','░','░','░','O'],['░','░','░','O','░'],['O','░', '^','░','░'],['░','O','O','O','░'], ['░','O','░','O','░']];
-
 class Field{
-    //OK
     constructor(field){
-        if(Array.isArray(field) && Field.checkValidFieldDim(field)){
+        if(Array.isArray(field) && Field.isValidFieldDim(field)){
             this.field = field;
         }else{
             console.log("Invalid input field! Generating our own field...")
@@ -16,75 +16,47 @@ class Field{
         }
     }
 
-    //OK
-    static printField(field){
-        const fieldDim1 = field.length;
-        let fieldLine = '';
-
-        for(let i=0; i < fieldDim1; i++){            
-            field[i].forEach(fieldChar => {
-                fieldLine += fieldChar;
-            });
-            console.log(fieldLine);
-            fieldLine = '';
-        }
-    }
-
-    static checkValidFieldDim(field){
-        const dim1 = field.length      //Number of subarray elements  
-        const dim2 = field[0].length;  //Length of the first subarray and subsequent elements.
-
-        if(dim1 <= 0){ //Handles call with no parameters.
-            return false; 
-        }else{
-            let valid = 1;
-            for(let i = 1 ; i < dim1 ;i++){
-                if(field[i].length !== dim2){
-                    return false
-                }
-            valid+=1;
-            }
-            if(valid === dim1){ //All subarrays have the same length and thus the map is fully rectangular. 
-                Field.printField(field);
-                console.log('Input field has valid dimensions:')
-                console.log(`Horizontal length of field:   ${dim2} units \nVertical length of the field: ${dim1} units`);
-                return true;
-            }
-        }
-        return false;
-    }
-
     updateField(field){
         Field.printField(field);
         const updatePrompt = require('prompt-sync')({sigint: true});
         let move = updatePrompt('Which way? ');
-        let playing = true, numberOfMoves = 0, currPosition = [0,0], updatePosition; //Default position for pathCharacter
+        let playing = true, numberOfMoves = 0, currPosition = [0,0], positionUpdate; //Default position for pathCharacter [0,0]
         
         while(playing){
             if(numberOfMoves === 0){
                 numberOfMoves +=1;
             }else{
+                console.log('Press W to go up, A to go left, S to go down and D to go right')
                 move = updatePrompt('Which way? ');
                 move = move.toLowerCase();
                 numberOfMoves +=1;
             }
             
             if(move !== 'q'){
-                 updatePosition = this.movePathChar(field, move, currPosition);
-                 currPosition = updatePosition[0];
-                 field = updatePosition[1];
-                
-                 //console.clear()
-                 Field.printField(field);
+                 positionUpdate = this.movePathChar(move, currPosition);
+                 
+                 if(Field.tryPositionUpdate(positionUpdate, field)){ //Check if position update is within bounds
+                    if(Field.checkPositionUpdate(currPosition,positionUpdate)){ //Check if valid move has happened
+                        
+                        field = this.drawThisBoard(field, positionUpdate, fieldElements.pathCharacter);
+                        currPosition = positionUpdate;
+                    }
+                    console.clear()
+                    Field.printField(field);
+                 }
+                 else{
+                     console.log("Out of bounds! You lost!");
+                     playing = false;
+                 }
             }else{
                 playing = false;
             }
         }
-    }   
-    
-    movePathChar(field, move, currPosition){
+    };
+
+    movePathChar(move, currPosition){
         move = move.toLowerCase();
-        let i = currPosition[0], j = currPosition[1];
+        let [i,j] = currPosition, flagValidMove = true;
 
         switch(move){
             case 'w': //Move path character up
@@ -101,28 +73,92 @@ class Field{
                 break;
             default:
                 console.log('This is not a valid move, please try again.');
+                flagValidMove = false;
                 break;
         };
 
-        if(Field.tryPositionUpdate(i, j, field)){
-            field[i][j] = pathCharacter;
+        if(flagValidMove){ //If valid move, update position
             currPosition = [i,j];
         }
-        return [currPosition,field];
+        return currPosition 
+    };
+
+
+    drawThisBoard(field, positionUpdate, character){
+        let [i,j] = positionUpdate;
+        field[i][j] = character;
+        return field;
     }
 
-    static tryPositionUpdate(i,j,field){
-        let dim1 = field.length, dim2 = field[0].length; 
+    determineOutcome(positionUpdate, field){
+        let [i,j] = positionUpdate, fieldPosition = field[i][j];
+
+        if(Field.tryPositionUpdate(i, j, field)){                     // Move within field bounds
+            if(fieldPosition === fieldElements.fieldCharacter){       // Moved to unexplored position
+                return 'newPosition';
+            }else if(fieldPosition === fieldElements.pathCharacter) { // Backtracked to previous position '*'
+                return 'backtrack'; 
+            }else if(fieldPosition === fieldElements.hat){            // Found the hat '^'
+                return 'win'; 
+            }else{
+                return 'lost';                                        // Found a hole 'O'
+            }
+        }
+        return 'lost'; //Out of bounds
+    };
+
+    //Utility functions
+    static printField(field){
+        const fieldDim1 = field.length;
+        let fieldLine = '';
+
+        for(let i=0; i < fieldDim1; i++){            
+            field[i].forEach(fieldChar => {
+                fieldLine += fieldChar;
+            });
+            console.log(fieldLine);
+            fieldLine = '';
+        }
+    };
+
+    static isValidFieldDim(field){
+        const dim1 = field.length      //Number of subarray elements  
+        const dim2 = field[0].length;  //Length of the first subarray and subsequent elements.
+
+        if(dim1 <= 0){ //Handles call with no parameters.
+            return false; 
+        }else{
+            for(let i = 1 ; i < dim1 ;i++){
+                if(field[i].length !== dim2){
+                    return false
+                }
+            }
+            return true;
+        }
+    };
+
+    //Checks if an update in position has happened.
+    static checkPositionUpdate(currPosition, positionUpdate){
+        let [i,j] = currPosition, [new_i,new_j] = positionUpdate
+
+        if(i === new_i && j === new_j){
+            return false; //No update in position
+        }
+        return true;
+    }
+
+    //Checks if new position is within field bounds.
+    static tryPositionUpdate(positionUpdate,field){
+        const dim1 = field.length, dim2 = field[0].length, [i,j] = positionUpdate; 
         if(i>=0 && i< dim1 && j>=0 && j<dim2){ 
             return true;
         }else{
-            console.log("Out of bounds!")
             return false;
         }
-    }
+    };
 }
 
-module.exports = {Field, testField};
+module.exports = {Field, testField, fieldElements};
 
 ///Working with user-input 
 
