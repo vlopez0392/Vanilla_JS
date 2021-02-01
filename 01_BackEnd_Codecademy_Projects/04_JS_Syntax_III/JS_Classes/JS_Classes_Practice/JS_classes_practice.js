@@ -70,18 +70,18 @@ class ShiftCipher{
     }
 
     encrypt(str){
-        const a = 97, z = 122, uppercasePositions = ShiftCipher.flagUpperCase(str);
+        const a = 97, z = 122;
         str = str.toLowerCase();
         let strArray = str.split('') ,encrypted = [], msg ='';
 
         strArray.forEach(element => {
             const encode = element.charCodeAt(0);
 
-            if(element === ' '){
+            if(encode < a || encode > z){
                 encrypted.push(encode);
             }else{
                 if((encode + this.shift) > z){
-                    encrypted.push(a + this.shift - 1);
+                    encrypted.push(a + this.shift - (1+ (z-encode)));
                 }else{
                     encrypted.push(encode + this.shift);
                 }
@@ -94,6 +94,32 @@ class ShiftCipher{
 
         return msg; //Encrypted Message
     }   
+
+    decrypt(str){ //Assume every character is either an uppercase letter or another symbol
+        const A = 65, Z = 90;
+        str = str.toUpperCase();
+        let strArray = str.split('') ,decrypted = [], msg ='';
+    
+        strArray.forEach(element => {
+            const decode = element.charCodeAt(0);
+
+            if(decode < A || decode > Z){
+                decrypted.push(decode);
+            }else{
+                if((decode - this.shift) < A){
+                    decrypted.push(Z - this.shift + (1+ (decode-A)));
+                }else{
+                    decrypted.push(decode - this.shift);
+                }
+            }
+        });
+
+        decrypted.forEach(element => {
+            msg = msg.concat(String.fromCharCode(element).toLowerCase());
+        });
+
+        return msg; //Encrypted Message
+    }
 
 
     //Utility functions
