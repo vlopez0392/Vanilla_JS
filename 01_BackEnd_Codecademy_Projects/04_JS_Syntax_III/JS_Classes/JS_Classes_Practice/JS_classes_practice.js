@@ -123,7 +123,7 @@ class ShiftCipher{
 
 
     //Utility functions
-    static flagUpperCase(str){
+    static flagUpperCase(str){ //In case you want to preserve the original capitalization of the message
         const strArray = str.split(''),
         flagArray = []; //Flag uppercase values
         
