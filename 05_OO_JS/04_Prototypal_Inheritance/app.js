@@ -37,7 +37,7 @@ console.log(customer1);
 console.log(customer1.greeting());
 
 
-//Customer greeting 
+//Customer greeting that overrides person greeting
 Customer.prototype.greeting = function(){
     return `Hello there ${this.firstName} ${this.lastName}! Welcome to our company`;
 }
