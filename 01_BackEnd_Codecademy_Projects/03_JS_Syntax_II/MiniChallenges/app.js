@@ -63,7 +63,7 @@ const groceries = (groceryArray) => {
       if(idx === 0){
         output = groceryArray[idx].item; 
       }else{
-        if((idx+1) != groceryArray.length){
+        if((idx+1) !== groceryArray.length){
           output = output.concat(`, ${groceryArray[idx].item}`);
         }else{
           output = output.concat(` and ${groceryArray[idx].item}`);
