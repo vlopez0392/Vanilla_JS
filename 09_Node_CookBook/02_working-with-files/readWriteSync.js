@@ -10,7 +10,7 @@ const contents = fs.readFileSync(filePath, "utf-8");
 console.log("File contents: ", contents);
 
 //Syncronous writing
-const updatedContents = contents.toLowerCase();
+const updatedContents = contents.toUpperCase();
 fs.writeFileSync(filePath, updatedContents);
-console.log("File updated")
+console.log("File updated!")
 console.log("File contents: ", updatedContents);
