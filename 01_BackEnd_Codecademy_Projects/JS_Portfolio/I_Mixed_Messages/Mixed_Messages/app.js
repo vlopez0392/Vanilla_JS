@@ -11,8 +11,8 @@ inputFeeling = document.getElementById('input-feeling');
 
 /*Variables*/
 let userInput = '' 
-par = document.querySelector('p'), 
-
+par = document.querySelectorAll('p');
+let dispMsg = par[par.length-1];
 
 /*Event listeners*/
 form.addEventListener("submit", displayUserFeeling); 
@@ -89,6 +89,8 @@ function switchFeeling(feeling, userInput){
 function displayUserFeeling(typed = true, targetId = 'none'){
     let msg = '';
     typed? msg = getTypedUserFeeling(): msg = getClickedUserFeeling(targetId);
+
+    console.log(msg);
 
     if(msg === ''){
         dispMsg.textContent = 'You didn\'t write anything... it\'s ok! Please try again!';
