@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrocePro | Create List</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/utilities.css">
+    <link rel="stylesheet" href="./style/animations.css">
+</head>
+<body>
+    <div id = "navbar">
+        <h1>GROCEPRO</h1>
+        <ul class = "navbar-options">
+            <li><a href="#">Home</a></li>
+            <li><a href="./newListTemplate.html">New List</a></li>
+            <li><a href="#">My Lists</a></li>
+        </ul>
+
+        <ul class = "user-access navbar-options">
+            <li><a href="#">Sign-up</a></li>
+            <li><a href="#">Log-in</a></li>
+        </ul>
+    </div>  
+    
+    <div id = "new-list-area">
+            <p class = "step">Step 1: Create a New Grocery List!<p>
+            <div id ="list-input">
+                <form action="" id = "new-list" >
+                    <label for = "new-list-name" class = "label">Grocery List Name</label>
+                    <input id = "new-list-name" type="text" name = "new-list-name" value = "" required autocomplete="off" class = "input">
+        
+                    <label for = "market-chain" class = "label">Supermarket Chain</label>
+                    <input id  = "market-chain" type="text" name = "new-list-name" value = "" required autocomplete="off" class = "input">
+        
+                    <label for="trip-date" class = "label"> Trip Date</label>
+                    <input type="date" id = "trip-date" name = "trip-date" class = "input">
+        
+                    <input type ="submit" value = "Create!" class = "submit">
+                </form>
+            </div>
+    </div>
+
+    <script src="./newList.js"></script>
+</body>
+</html>

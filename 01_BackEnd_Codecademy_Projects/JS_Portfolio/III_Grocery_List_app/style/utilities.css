@@ -1,5 +1,51 @@
 /*Utility classes for the GroceHero App*/
 
+/*Navbar*/
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #00cc66;
+    height: 75px;
+    align-items: center;
+    color: #ddd;
+    flex-wrap: wrap;
+}
+
+#navbar h1{ 
+    font-size: 20px;
+    padding: 0px 30px;
+    align-self: center;
+}
+
+#navbar .navbar-options{ 
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-options li{
+    list-style: none;
+}
+
+.navbar-options li a{
+    text-decoration:wavy;
+    padding: 0px 20px;
+    font-size: 20px;
+    color: #ddd;
+}
+
+.user-access li a{
+    text-decoration: none;
+    padding: 0px 20px;
+    font-size: 20px;
+    color: #ddd;
+}
+
+#navbar li a:hover{
+    color:#00592c;
+    text-decoration: underline;
+}
+
+/*New Grocery List Form*/
 .input{
     display:block;
     margin-top: 10px;
@@ -16,5 +62,12 @@
     margin:auto;
     margin-top: 30px;
     border-radius: 3px;
-    padding: 0px 10px;
+    padding: 5px 10px;
+    background-color:  #00cc66;
+    color: #ddd;
 }
+
+.label{
+    margin:auto;
+}
+
