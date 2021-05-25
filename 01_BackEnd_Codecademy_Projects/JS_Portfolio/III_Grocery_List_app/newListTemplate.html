@@ -7,25 +7,25 @@
     <title>GrocePro | Create List</title>
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/utilities.css">
-    <link rel="stylesheet" href="./style/animations.css">
+    <link rel="stylesheet" href="./style/animations.css" crossorigin="anonymous">
 </head>
 <body>
     <div id = "navbar">
         <h1>GROCEPRO</h1>
         <ul class = "navbar-options">
-            <li><a href="#">Home</a></li>
-            <li><a href="./newListTemplate.html">New List</a></li>
-            <li><a href="#">My Lists</a></li>
+            <li><a class = "light-link" href="#">Home</a></li>
+            <li><a class = "light-link" href="./newListTemplate.html">New List</a></li>
+            <li><a class = "light-link" href="#">My Lists</a></li>
         </ul>
 
         <ul class = "user-access navbar-options">
-            <li><a href="#">Sign-up</a></li>
-            <li><a href="#">Log-in</a></li>
+            <li><a href="#" class = "light-link">Sign-up</a></li>
+            <li><a href="#" class = "light-link">Log-in</a></li>
         </ul>
     </div>  
     
     <div id = "new-list-area">
-            <p class = "step">Step 1: Create a New Grocery List!<p>
+            <p class = "step1">Step 1: Create a New Grocery List!<p>
             <div id ="list-input">
                 <form action="" id = "new-list" >
                     <label for = "new-list-name" class = "label">Grocery List Name</label>
@@ -41,7 +41,6 @@
                 </form>
             </div>
     </div>
-
     <script src="./newList.js"></script>
 </body>
 </html>

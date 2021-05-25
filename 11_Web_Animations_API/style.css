@@ -1,0 +1,13 @@
+/*Let's make a box in here*/
+
+body{
+    background: #251c1c;
+}
+
+.box{
+    background-color: #eae9e9;
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    margin-top: 300px;
+}

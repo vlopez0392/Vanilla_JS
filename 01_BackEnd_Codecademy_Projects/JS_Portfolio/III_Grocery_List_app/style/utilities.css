@@ -26,14 +26,7 @@
     list-style: none;
 }
 
-.navbar-options li a{
-    text-decoration:wavy;
-    padding: 0px 20px;
-    font-size: 20px;
-    color: #ddd;
-}
-
-.user-access li a{
+.light-link{
     text-decoration: none;
     padding: 0px 20px;
     font-size: 20px;

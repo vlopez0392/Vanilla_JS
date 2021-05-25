@@ -2,18 +2,37 @@
 
 /*New list form functionality*/ 
 const createListForm = document.getElementById("new-list");
-const step = document.querySelector(".step");
+const step1 = document.querySelector(".step1");
+const newListInput = document.getElementById("new-list-area");
+const windowInnerWidth = window.innerWidth;
 
-/*Upon form submission slide out of the browser window*/
-createListForm.addEventListener('submit', (e) => { 
-    const windowInnerWidth = window.innerWidth;
-    const keyFrame = document.styleSheets[2].cssRules[2]; 
+const success = valueReceived => {console.log(valueReceived)};
 
-    keyFrame.appendRule(`to{transform: translateX(${windowInnerWidth}px)}`);  
+/*Create a new list functionality*/
+const createNewList = new Promise((resolve, reject) => {
+    createListForm.addEventListener('submit', (e) => { 
+        
+        //Upon form submission slide out of the browser window
+        const keyFrameRules = document.styleSheets[2].cssRules[2]; 
+        keyFrameRules.appendRule(`to{transform: translateX(${2*windowInnerWidth}px)}`);  
+        
+        createListForm.style.animation = "slideOut 0.5s forwards";
+        step1.style.animation = "slideOut 0.5s forwards";
+        
+        //Remove step and form elements from the DOM after 2 seconds
+        setTimeout(deleteChildNodes, 2000, newListInput);
+        
+        e.preventDefault();
+    });
 
-    createListForm.style.animation = "slideOut 1s forwards";
-    step.style.animation = "slideOut 1s forwards";
-    e.preventDefault();
-});
+    resolve('List Created!')
+}).then(success);
 
+/*Utility functions*/
+//Deletes child nodes for a given parent element
+function deleteChildNodes(parent){
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
+    }
+}
 
