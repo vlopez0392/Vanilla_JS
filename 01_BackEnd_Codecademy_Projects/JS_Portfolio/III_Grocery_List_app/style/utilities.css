@@ -1,51 +1,37 @@
-/*Utility classes for the GroceHero App*/
-
-/*Navbar*/
-#navbar{
-    display: flex;
-    justify-content: space-between;
-    background-color: #00cc66;
-    height: 75px;
-    align-items: center;
-    color: #ddd;
-    flex-wrap: wrap;
-}
-
-#navbar h1{ 
-    font-size: 20px;
-    padding: 0px 30px;
-    align-self: center;
-}
-
-#navbar .navbar-options{ 
-    display: flex;
-    justify-content: center;
-}
-
-.navbar-options li{
-    list-style: none;
-}
+/*Utility classes for the GrocePro App*/
 
 .light-link{
     text-decoration: none;
     padding: 0px 20px;
     font-size: 20px;
-    color: #ddd;
-}
-
-#navbar li a:hover{
-    color:#00592c;
-    text-decoration: underline;
+    color: #e5eee9;
+    border: 1px;
 }
 
 /*New Grocery List Form*/
-.input{
+/*Card-container*/
+.card-container{
+    width: 50%;
+    margin: auto;
+    height: 400px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
+    padding-top: 40px;
+}
+
+/*Form child elements*/
+input[type = "text"], input[type = "date"]{
     display:block;
     margin-top: 10px;
     margin-bottom: 10px;
     width: 100%;
-    font-size: 20px;
+    font-size: 18px;
     padding: 10px 0;
+    border: none; 
+    border-bottom: 1px solid #b4becb;
+}
+
+input[type = "text"]:focus, input[type = "date"]:focus{
+    outline: none;
 }
 
 .submit{
@@ -57,10 +43,15 @@
     border-radius: 3px;
     padding: 5px 10px;
     background-color:  #00cc66;
-    color: #ddd;
+    color: #e5eee9;
 }
 
-.label{
+label{
     margin:auto;
+    width: 100%;
 }
 
+.step{
+    margin: 40px;
+    font-size: 20px;
+}

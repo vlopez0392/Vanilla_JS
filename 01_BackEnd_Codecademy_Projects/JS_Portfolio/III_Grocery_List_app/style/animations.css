@@ -1,6 +1,7 @@
 /*Animation styles for the GrocePro Grocery App*/
+
 /*New Grocery List*/   
-#new-list-area{
+#new-list-card{
     animation-name: slideIn;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
@@ -10,8 +11,4 @@
     from{
         transform: translateX(-1500px);
     }
-}
-
-@keyframes slideOut {
-    
 }

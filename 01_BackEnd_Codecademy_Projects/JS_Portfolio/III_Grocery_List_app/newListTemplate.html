@@ -7,7 +7,7 @@
     <title>GrocePro | Create List</title>
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/utilities.css">
-    <link rel="stylesheet" href="./style/animations.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/animations.css" ">
 </head>
 <body>
     <div id = "navbar">
@@ -18,28 +18,35 @@
             <li><a class = "light-link" href="#">My Lists</a></li>
         </ul>
 
-        <ul class = "user-access navbar-options">
-            <li><a href="#" class = "light-link">Sign-up</a></li>
-            <li><a href="#" class = "light-link">Log-in</a></li>
+        <ul class = "user-access">
+            <li><a href="#" class = "light-link sign-up">Sign up</a></li>
+            <li><a href="#" class = "light-link">Log in</a></li>
         </ul>
     </div>  
     
-    <div id = "new-list-area">
-            <p class = "step1">Step 1: Create a New Grocery List!<p>
-            <div id ="list-input">
-                <form action="" id = "new-list" >
-                    <label for = "new-list-name" class = "label">Grocery List Name</label>
-                    <input id = "new-list-name" type="text" name = "new-list-name" value = "" required autocomplete="off" class = "input">
-        
-                    <label for = "market-chain" class = "label">Supermarket Chain</label>
-                    <input id  = "market-chain" type="text" name = "new-list-name" value = "" required autocomplete="off" class = "input">
-        
-                    <label for="trip-date" class = "label"> Trip Date</label>
-                    <input type="date" id = "trip-date" name = "trip-date" class = "input">
-        
-                    <input type ="submit" value = "Create!" class = "submit">
-                </form>
+    <div id = "new-list-card">
+            <p id = "step1" class ="step">Step 1: Create a New Grocery List!<p>
+            <div class = card-container>
+                <div id ="list-input">
+                    <form action="" id = "new-list" >
+                        <label for = "new-list-name">List Name:</label>
+                        <input id = "new-list-name" type="text" name = "new-list-name" value = "" required autocomplete="off">
+            
+                        <label for = "market-chain">Supermarket Chain:</label>
+                        <input id  = "market-chain" type="text" name = "new-list-name" value = "" required autocomplete="off">
+            
+                        <label for="trip-date"> Trip Date:</label>
+                        <input type="date" id = "trip-date" name = "trip-date" class = "input">
+            
+                        <input type ="submit" value = "Create" class = "submit">
+                    </form>
+                </div>
             </div>
+        </div>
+        
+        <div id ="add-to-list-card">
+            <p id = "step2" class ="step" >Step 2: Add to the grocery list (Slide in test)</p>
+        </div>
     </div>
     <script src="./newList.js"></script>
 </body>

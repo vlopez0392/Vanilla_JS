@@ -1,4 +1,6 @@
 /*Style for the GrocePro Grocery App*/
+
+/*CSS Reset and body*/
 *{
     margin: 0;
     padding : 0;
@@ -10,8 +12,63 @@ body{
     font-size: 16px;
 }
 
-/*Input form*/
-#new-list-area{
+/*Navbar*/
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #00cc66;
+    height: 75px;
+    align-items: center;
+    color: #e5eee9;
+    flex-wrap: wrap;
+    box-shadow: 0 3px 10px rgb(0,0,0,0.2);
+}
+
+#navbar h1{ 
+    font-size: 20px;
+    padding: 0px 30px;
+    align-self: center;
+}
+
+/*Navbar options*/
+#navbar .navbar-options{ 
+    display: flex;
+}
+
+.navbar-options li{
+    list-style: none;
+}
+
+#navbar li a:hover:not(.sign-up){
+    color:#00592c;
+}
+
+/* 2- User access*/
+.user-access{
+    display: flex; 
+    height: 100%;
+    align-items: center;
+}
+
+.user-access li{
+    list-style: none;
+    display:flex;
+    height: 60%;
+    align-items: center;
+}
+
+.user-access li:first-child{
+    border: 2px solid #e5eee9;
+    border-radius: 10px ; 
+}
+
+.user-access li:first-child:hover{
+    border: 2px solid ;
+    background-color: #002c16
+}
+
+/*New Grocery List Form*/
+#new-list-card{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,14 +76,17 @@ body{
     margin: auto;
 }
 
-#new-list-area .step1{
+#step1{
     align-self: flex-start;
-    margin: 40px;
-    font-size: 20px;
 }
 
 #new-list{
     max-width: 400px;
     margin:0 50px; 
+}
+
+/*Add to list form*/
+#add-to-list-card{
+    display:none;
 }
 
